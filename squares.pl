@@ -10,6 +10,7 @@
 %  Author: Christian Holzbaur           christian@ai.univie.ac.at %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(clpq)).
 
 /*
 This beautiful example of disequations at work is due
@@ -20,9 +21,6 @@ translation of the original Prolog-III program to clp(q,r)
 [Colmerauer 90]
 	Colmerauer A.: An Introduction to Prolog III,
 	Communications of the ACM, 33(7), 69-90, 1990.
-
-
-
 
 | ?- length(L,9),filled_rectangle(A,L).
 
@@ -35,12 +33,12 @@ L = [33/61,36/61,28/61,5/61,2/61,9/61,25/61,7/61,16/61] ?
 
 
 rectangle( A, Rs) :-
-  Rs = [X1,X2,X3,X4,X5,X6,X7,X8,X9],
+  length(Rs, 9),
   filled_rectangle( A, Rs).
 
 filled_rectangle( A, C) :-
   { A >= 1 },
-  distinct_squares( C), 			% also acts as generator [], [_], [_,_], ...
+  distinct_squares( C),				% also acts as generator [], [_], [_,_], ...
   filled_zone( [-1,A,1], _, C, []).
 
 distinct_squares( []).
