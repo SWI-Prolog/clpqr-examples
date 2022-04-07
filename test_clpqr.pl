@@ -37,9 +37,11 @@
           ]).
 :- use_module(library(plunit)).
 :- use_module(library(debug)).
+:- use_module(library(terms)).
 
 test_clpqr :-
-    run_tests([ mip
+    run_tests([ mip,
+                mg
               ]).
 
 :- begin_tests(mip).
@@ -68,9 +70,39 @@ test(sample2) :- run_example(sample2, 375).
 
 :- end_tests(mip).
 
+:- begin_tests(mg).
+
+:- [mg].
+
+test(mg, [nondet]) :-
+    mg(P,12,0.01,B,Mp),
+    dump([P,B,Mp], [p,b,mp], G),
+    assertion(float_eq(G,
+                       [b=1.1268250301319698*p-12.682503013196973*mp],
+                       0.0001)).
+
+:- end_tests(mg).
+
+		 /*******************************
+		 *            HELPERS		*
+		 *******************************/
+
+float_eq(T1, T2, D) :-
+    mapsubterms(float_eq_(D), T1, T2).
+
+float_eq_(_, T1, T2) :-
+    T1 =@= T2,
+    !.
+float_eq_(D, F1, F2) :-
+    float(F1),
+    float(F2),
+    abs(F1-F2) < D.
+
 :- multifile prolog:message//1.
 
 prolog:message(clpqr_test_failure(Set,Test,Expect,Got)) -->
     [ 'clp(QR) test failure.  Test set ~p, test ~p, Expected ~p, Got ~p'-
       [Set,Test,Expect,Got]
     ].
+
+
