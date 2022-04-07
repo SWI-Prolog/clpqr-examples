@@ -44,7 +44,8 @@ test_clpqr :-
                 mg,
                 root,
                 squares,
-                simplex
+                simplex,
+                eliminat
               ]).
 
 :- begin_tests(mip).
@@ -141,6 +142,16 @@ ex(water, [0,0,0,1000,0,0,50,_,1000r3,_,4000,0,7450r3,0,0,5000,250,600,_,0],
 
 :- end_tests(simplex).
 
+:- begin_tests(eliminat).
+
+:- [eliminat].
+
+% Note that we must check semantical equivalence instead of syntactical.
+test(hull, L == [x+y>=2, y>=0, x>=1, x+1r2*y=<3, y=<2]) :-
+    conv_hull([ [1,1], [2,0], [3,0], [1,2], [2,2] ], [X,Y]),
+    dump([X,Y],[x,y],L).
+
+:- end_tests(eliminat).
 
 		 /*******************************
 		 *            HELPERS		*
