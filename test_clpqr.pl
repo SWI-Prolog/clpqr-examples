@@ -41,7 +41,8 @@
 
 test_clpqr :-
     run_tests([ mip,
-                mg
+                mg,
+                root
               ]).
 
 :- begin_tests(mip).
@@ -82,6 +83,18 @@ test(mg, [nondet]) :-
                        0.0001)).
 
 :- end_tests(mg).
+
+:- begin_tests(root).
+
+:- [root].
+
+test(sqrt, L == 886731088897r627013566048) :-
+    root(5, L).
+test(e, L == 93405312000r34361893981) :-
+    e(10, L).
+
+:- end_tests(root).
+
 
 		 /*******************************
 		 *            HELPERS		*
