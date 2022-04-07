@@ -42,7 +42,8 @@
 test_clpqr :-
     run_tests([ mip,
                 mg,
-                root
+                root,
+                squares
               ]).
 
 :- begin_tests(mip).
@@ -95,6 +96,16 @@ test(e, L == 93405312000r34361893981) :-
 
 :- end_tests(root).
 
+:- begin_tests(squares).
+
+:- [squares].
+
+test(9, A-L == 33r32-[15r32, 9r16, 1r4, 7r32, 1r8, 7r16, 1r32, 5r16, 9r32]) :-
+    length(L, 9),
+    filled_rectangle(A,L),
+    !.
+
+:- end_tests(squares).
 
 		 /*******************************
 		 *            HELPERS		*
