@@ -10,6 +10,7 @@
 %  Author: Christian Holzbaur           christian@ai.univie.ac.at %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+:- use_module(library(clpq)).
 
 % b152 p.32	40/160/17200
 example( 1, [X1,X2], Z) :-
@@ -319,7 +320,7 @@ allpos( [V|Vs]) :-
 
 % --------------------------------------------------------------------------
 
-test(0) :- { A=<2,B=<3,C=<4,A+B+C=10 }. 	% must fail
+test(0) :- { A=<2,B=<3,C=<4,A+B+C=10 }.		% must fail
 
 test(5) :-
  {
