@@ -146,6 +146,35 @@ ex(water, [0,0,0,1000,0,0,50,_,1000r3,_,4000,0,7450r3,0,0,5000,250,600,_,0],
 
 :- [eliminat].
 
+% TBD: these results have not verified to be correct.  They merely
+% test consistent behavior of clp(Q).
+test(1, L == [ x3-1r6*x4=<1r3,
+               x3-13r18*x4>= -2r9,
+               x3-8r9*x4=<1r9,
+               x3-11r9*x4=<1r9,
+               x3-1r3*x4>= -1r3
+             ]) :-
+    example(1, [_,_,X3,X4]),
+    dump([X3,X4], [x3,x4], L).
+test(2, C == [ x0-73r93*x1+91r93*x2-1r93*x3+23r93*x4 =< -29r31,
+               x0+9r43*x1-14r43*x2-27r43*x3-40r43*x4 >= -39r43,
+               x0+44r81*x1-19r81*x2+22r81*x3+73r81*x4>=17r81,
+               x0-29r25*x1+1r50*x2-57r50*x3-2r5*x4 >= -3r25,
+               x0-23r49*x1-31r49*x2-76r49*x3+27r49*x4=<3r49,
+               x0+7r39*x1+62r39*x2+18r13*x3-2r3*x4 =< -9r13,
+               x0+2r19*x1-64r95*x2-4r5*x3+24r95*x4 >= -33r95,
+               x0+2r3*x1-38r45*x2-53r90*x3+4r15*x4 =< -34r45,
+               x0-2r17*x1-35r68*x2-x3-35r68*x4>=5r4
+             ]) :-
+    example(2, L), dump(L, [x0, x1, x2, x3,x4], C).
+test(3, C == [ x1+4r45*x2-2r5*x3+13r45*x4=<4r45,
+               x1+1r18*x2-1r2*x3+7r18*x4>=1r18,
+               x1+1r18*x2-1r2*x3+11r36*x4>=1r18,
+               x2>=0,
+               x1>0,
+               x1+1r12*x2-1r4*x3+1r12*x4=<1r12
+             ]) :-
+    example(3, L), dump(L, [x1, x2, x3,x4], C).
 % Note that we must check semantical equivalence instead of syntactical.
 test(hull, L == [x+y>=2, y>=0, x>=1, x+1r2*y=<3, y=<2]) :-
     conv_hull([ [1,1], [2,0], [3,0], [1,2], [2,2] ], [X,Y]),
